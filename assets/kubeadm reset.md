@@ -1,3 +1,0 @@
-kubeadm reset
-
-kubeadm reset
