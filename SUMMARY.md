@@ -8,7 +8,7 @@
 * [kubeadm config print init-defaults](kubeadm-config-print-init-defaults.md)
 * [kubeadm init --config](kubeadm-init--config.md)
 * [kubeadm init log 说明](kubeadm-init-log说明.md)
-* [kubeadm init troubleshoting过程](kubeadm init troubleshoting过程.md)
+* [kubeadm init troubleshoting过程](kubeadm-init-troubleshoting过程.md)
 * [kubeadm-config.yaml](kubeadm-config.yaml.md)
 * [kubeadm reset](kubeadm reset.md)
 * [kubectl get node.md](kubectl-get-node.md)
