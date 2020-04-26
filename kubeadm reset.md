@@ -1,3 +1,2 @@
 kubeadm reset
 
-kubeadm reset
