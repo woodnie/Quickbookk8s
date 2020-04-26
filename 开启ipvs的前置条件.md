@@ -1,6 +1,5 @@
 开启ipvs的前置条件
 
-
 ```
 modprobe br_netfiltr
 
@@ -17,3 +16,6 @@ modprobe br_netfiltr
 -rwxr-xr-x. 1 root root 124 Apr 25 22:26 /etc/sysconfig/modules/ipvs.modules
 [root@master ~]#
 ```
+
+
+
