@@ -1,5 +1,11 @@
 开启ipvs的前置条件
 
+
+
+`[root@master ~]# yum insatll ipvsadm`
+
+
+
 ```
 modprobe br_netfiltr
 
