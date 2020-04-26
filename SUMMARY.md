@@ -15,4 +15,5 @@
 * [kubectl 常用命令](kubectl 常用命令.md)
 * [开启ipvs的前置条件](开启ipvs的前置条件.md)
 * [安装flannel](安装flannel.md)
+* [temp](temp.md)
 
