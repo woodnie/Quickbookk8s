@@ -4,5 +4,9 @@
 * 集群级别：role,整个集群可见
 * 元数据类型：HPA 
 
+example:
+
+\[root@master ~\]\# kubectl run nginx-wood --image=nginx
+
 
 
