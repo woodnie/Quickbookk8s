@@ -1,15 +1,16 @@
+```
 apiVersion: kubeadm.k8s.io/v1beta2
 bootstrapTokens:
 - groups:
   - system:bootstrappers:kubeadm:default-node-token
-  token: abcdef.0123456789abcdef`
-  ttl: 24h0m0s`
+  token: abcdef.0123456789abcdef
+  ttl: 24h0m0s
   usages:
   - signing
   - authentication
 kind: InitConfiguration
 localAPIEndpoint:
-  advertiseAddress: 192.168.1.100`
+  advertiseAddress: 192.168.1.100
   bindPort: 6443
 nodeRegistration:
   criSocket: /var/run/dockershim.sock
@@ -43,4 +44,4 @@ kind: KubeProxyConfiguration
 featureGates:
   SupportIPVSProxyMode: true
 mode: ipvs
-
+```
