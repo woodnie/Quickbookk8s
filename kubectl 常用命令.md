@@ -116,27 +116,23 @@ Use "kubectl options" for a list of global command-line options \(applies to all
 
 \[root@master ~\]\# kubectl api-resources //a complete list of supported resources
 
-`kubectl get pods --all-namespaces      //查看kube-flannel 状态    running 为安装正常        
+`kubectl get pods --all-namespaces      //查看kube-flannel 状态    running 为安装正常          
 kubectl get pods --all-namespaces -o wide`
 
-kubectl get namespaces`kubectl get nodes        
-kubectl get cs        
-kubectl get csr        
-kubectl apply -f  xxxx.yaml        
-kubectl create -f xxxx.yaml        
+kubectl get namespaces`kubectl get nodes          
+kubectl get cs          
+kubectl get csr          
+kubectl apply -f  xxxx.yaml          
+kubectl create -f xxxx.yaml          
 kubectl delete -f xxxxx.yaml`
-
-
 
 4个十分有用的命令可以帮助你排查Pod的故障：
 
-`ubectl logs <pod name>`能够帮助检索Pod的容器日志
+`kubectl logs <pod name>`能够帮助检索Pod的容器日志
 
 `kubectl describe pod <pod name>`能够有效地检索与Pod相关的事件列表
 
 `kubectl get pod <pod name>`对于提取存储在Kubernetes中的Pod的YAML定义十分有用
 
 `kubectl exec -ti <pod name>bash`可以用于在Pod其中一个容器中运行一个交互式命令
-
-
 
