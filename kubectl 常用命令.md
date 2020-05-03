@@ -1,4 +1,8 @@
-`[root@master ~]# kubectl`
+##kubectl
+
+
+```
+[root@master ~]# kubectl
 
 kubectl controls the Kubernetes cluster manager.
 
@@ -111,12 +115,13 @@ kubectl \[flags\] \[options\]
 Use "kubectl &lt;command&gt; --help" for more information about a given command.
 
 Use "kubectl options" for a list of global command-line options \(applies to all commands\).
+```
 
-\[root@master ~\]\# kubectl
+[root@master ~]# kubectl
 
-\[root@master ~\]\# kubectl api-resources //a complete list of supported resources
+[root@master ~\]\# kubectl api-resources //a complete list of supported resources
 
-`kubectl get pods --all-namespaces      //查看kube-flannel 状态    running 为安装正常          
+kubectl get pods --all-namespaces      //查看kube-flannel 状态    running 为安装正常          
 kubectl get pods --all-namespaces -o wide`
 
 kubectl get namespaces`kubectl get nodes          

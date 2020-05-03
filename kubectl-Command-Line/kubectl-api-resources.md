@@ -1,3 +1,6 @@
+##kubectl api-resources
+
+
 ```
 
 [root@master ~]# kubectl api-resources
