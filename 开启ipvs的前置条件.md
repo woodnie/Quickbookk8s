@@ -1,12 +1,10 @@
-开启ipvs的前置条件
-
-
-
-`[root@master ~]# yum insatll ipvsadm`
+##开启ipvs的前置条件
 
 
 
 ```
+[root@master ~]# yum insatll ipvsadm`
+
 modprobe br_netfiltr
 
 [root@master ~]# cat > /etc/sysconfig/modules/ipvs.modules <<EOF

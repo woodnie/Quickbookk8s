@@ -1,5 +1,3 @@
-kubeadm config print init-defaults
-
 ## kubeadm config print init-defaults
 
 ```

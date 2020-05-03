@@ -1,6 +1,6 @@
-\#\# kubeadm init log
+## kubeadm init log
 
-
+```
 
 `[root@master ~]# kubeadm init`
 
@@ -22,7 +22,7 @@
 
 `[kubelet-start] Starting the kubelet`
 
-`[certs] Using certificateDir folder "/etc/kubernetes/pki"	##证书`
+`[certs] Using certificateDir folder "/etc/kubernetes/pki"	>>证书`
 
 `[certs] Generating "ca" certificate and key`
 
@@ -145,4 +145,4 @@
 `    --discovery-token-ca-cert-hash sha256:c31781858d5b0a3dd4c1672315d2624136b29a16e1a1db49e3cd7db54faee969`
 
 
-
+```

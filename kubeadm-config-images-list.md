@@ -1,5 +1,3 @@
-kubeadm config images list
-
 ## kubeadm config images list
 
 ```
