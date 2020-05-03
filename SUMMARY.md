@@ -11,6 +11,7 @@
 * [kubeadm init troubleshoting过程](kubeadm-init-troubleshoting过程.md)
 * [kubeadm-config.yaml](kubeadm-config.yaml.md)
 * [kubeadm reset](kubeadm reset.md)
+* [kubectl create](kubectl-Command-Line/kubectl-create.md)
 * [kubectl get node](kubectl-get-node.md)
 * [开启ipvs的前置条件](开启ipvs的前置条件.md)
 * [kubectl Command Line](kubectl 常用命令.md)
