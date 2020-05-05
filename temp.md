@@ -1,13 +1,22 @@
+master:  
+![](/assets/master.PNG)  
+    APIServer: 组件和Apiserver 通信，  
+    Controller：状态管理（水平扩张，自动修复）  
+    Scheduler：把容器交付给node  
+    etcd:分布式存储系统  
+node:  
+![](/assets/node.PNG)
+
 集群资源分类：
 
-* 名称空间级别：kubectl get -n default, kubectl get -n kube-system
+* 名称空间级别：kubectl get namespace
 * 集群级别：role,整个集群可见
 * 元数据类型：HPA 
 
 example:
 
 > `[root@master ~]# kubectl run nginx-wood --image=nginx //创建pod nginx-wood`
-
+>
 > `[root@master ~]# kubectl get pod //查看pod nginx-wood信息`
 >
 > `NAME         READY   STATUS    RESTARTS   AGE`
@@ -32,13 +41,12 @@ example:
 >
 > `8fc9a1113982        nginx                    "nginx -g 'daemon of…"   5 hours ago         Exited (0) 5 hours ago                       festive_liskov`
 >
-> `[root@master ~]# kubectl delete pod  nginx-wood //删除pod nginx-wood`
+> `[root@master ~]# kubectl delete pod  nginx-wood  
+>  //删除pod nginx-wood`
 >
-> `pod "nginx-wood" deleted`
+> `pod "nginx-wood" deleted`
 >
-> `[root@master ~]#`
-
-
+> `[root@master ~]#`
 
 
 
