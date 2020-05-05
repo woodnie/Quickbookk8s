@@ -11,7 +11,7 @@ Kubernetes 的架构：介绍 Kubernetes 的核心组件，以及介绍它们之
 Kubernetes 的核心概念与核心 API；
  
 
-一、什么是 Kubernetes
+#一、什么是 Kubernetes
  
 
 Kubernetes，从官方网站上可以看到，它是一个工业级的容器编排平台。Kubernetes 这个单词是希腊语，它的中文翻译是“舵手”或者“飞行员”。在一些常见的资料中也会看到“ks”这个词，也就是“k8s”，它是通过将8个字母“ubernete ”替换为“8”而导致的一个缩写。
@@ -34,7 +34,7 @@ Kubernetes 为什么要用“舵手”来命名呢？大家可以看一下这张
 
  
 
-二、Kubernetes 有如下几个核心的功能：
+#二、Kubernetes 有如下几个核心的功能：
  
 
 服务的发现与负载的均衡；
@@ -59,7 +59,7 @@ Kubernetes 会帮助我们去做应用的自动发布与应用的回滚，以及
 
  
 
-1、调度
+##1、调度
  
 
 Kubernetes 可以把用户提交的容器放到 Kubernetes 管理的集群的某一台节点上去。Kubernetes 的调度器是执行这项能力的组件，它会观察正在被调度的这个容器的大小、规格。
@@ -74,7 +74,7 @@ Kubernetes 可以把用户提交的容器放到 Kubernetes 管理的集群的某
 
  
 
-2、自动修复
+##2、自动修复
  
 
 Kubernetes 有一个节点健康检查的功能，它会监测这个集群中所有的宿主机，当宿主机本身出现故障，或者软件出现故障的时候，这个节点健康检查会自动对它进行发现。
@@ -95,7 +95,7 @@ Kubernetes 有一个节点健康检查的功能，它会监测这个集群中所
 
  
 
-3、水平伸缩
+##3、水平伸缩
  
 
 Kubernetes 有业务负载检查的能力，它会监测业务上所承担的负载，如果这个业务本身的 CPU 利用率过高，或者响应时间过长，它可以对这个业务进行一次扩容。
@@ -118,7 +118,7 @@ Kubernetes 有业务负载检查的能力，它会监测业务上所承担的负
 
  
 
-三、Kubernetes 的架构
+#三、Kubernetes 的架构
  
 
 Kubernetes 架构是一个比较典型的二层架构和 server-client 架构。Master 作为中央的管控节点，会去与 Node 进行一个连接。
@@ -292,7 +292,7 @@ Service 提供了一个或者多个 Pod 实例的稳定访问地址。
 
  
 
-
+![](/assets/k8sC/service.png)
 
  
 
@@ -307,11 +307,11 @@ Namespace 一个用例，比如像在阿里巴巴，我们内部会有很多个 
 
  
 
-
+![](/assets/k8sC/namespace.png)
 
  
 
-Kubernetes 的 API
+###Kubernetes 的 API
  
 
 下面我们介绍一下 Kubernetes 的 API 的基础知识。从 high-level 上看，Kubernetes API 是由 HTTP+JSON 组成的：用户访问的方式是 HTTP，访问的 API 中 content 的内容是 JSON 格式的。
@@ -326,7 +326,7 @@ Kubernetes 的 kubectl 也就是 command tool，Kubernetes UI，或者有时候�
 
  
 
-
+![](/assets/k8sC/api.png)
 
  
 
@@ -357,7 +357,7 @@ Kubernetes 的 kubectl 也就是 command tool，Kubernetes UI，或者有时候�
 这些 label 是可以被 selector，也就是选择器所查询的。这个能力实际上跟我们的 sql 类型的 select 语句是非常相似的，比如下图中的三个 Pod 资源中，我们就可以进行 select。name color 等于 red，就是它的颜色是红色的，我们也可以看到，只有两个被选中了，因为只有他们的 label 是红色的，另外一个 label 中写的 color 等于 yellow，也就是它的颜色是黄色，是不会被选中的。
 
  
-
+![](/assets/k8sC/api-label.png)
 
 
  
@@ -374,7 +374,7 @@ Kubernetes 的 kubectl 也就是 command tool，Kubernetes UI，或者有时候�
 
  
 
-五、以一个 demo 结尾
+###五、以一个 demo 结尾
  
 
 最后一部分，我想以一个例子来结束，让大家跟我一起来尝试一个 kubernetes，在尝试 Kubernetes 之前，我希望大家能在本机上安装一下 Kubernetes，安装一个 Kubernetes 沙箱环境。
