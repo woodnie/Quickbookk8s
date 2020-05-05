@@ -136,7 +136,7 @@ Kubernetes 架构是一个比较典型的二层架构和 server-client 架构。
 Kubernetes 的 Master 包含四个主要的组件：API Server、Controller、Scheduler 以及 etcd。如下图所示：
 
  
-
+![](/assets/k8sC/master.PNG)
 
 
  
@@ -163,7 +163,7 @@ Kubernetes 的架构：Node
 Kubernetes 的 Node 是真正运行业务负载的，每个业务负载会以 Pod 的形式运行。等一下我会介绍一下 Pod 的概念。一个 Pod 中运行的一个或者多个容器，真正去运行这些 Pod 的组件的是叫做 kubelet，也就是 Node 上最为关键的组件，它通过 API Server 接收到所需要 Pod 运行的状态，然后提交到我们下面画的这个 Container Runtime 组件中。
 
  
-
+![](/assets/k8sC/node.PNG)
 
 
  
@@ -204,13 +204,13 @@ Kubernetes 的 Node 并不会直接和 user 进行 interaction，它的 interact
 
  
 
-四、Kubernetes 的核心概念与它的 API
+#四、Kubernetes 的核心概念与它的 API
  
 
-核心概念
+##核心概念
  
 
-第一个概念：Pod
+###第一个概念：Pod
  
 
 Pod 是 Kubernetes 的一个最小调度以及资源单元。用户可以通过 Kubernetes 的 Pod API 生产一个 Pod，让 Kubernetes 对这个 Pod 进行调度，也就是把它放在某一个 Kubernetes 管理的节点上运行起来。一个 Pod 简单来说是对一组容器的抽象，它里面会包含一个或多个容器。
@@ -233,7 +233,7 @@ Pod 是 Kubernetes 的一个最小调度以及资源单元。用户可以通过 
 
  
 
-第二个概念：Volume
+###第二个概念：Volume
  
 
 Volume 就是卷的概念，它是用来管理 Kubernetes 存储的，是用来声明在 Pod 中的容器可以访问文件目录的，一个卷可以被挂载在 Pod 中一个或者多个容器的指定路径下面。
@@ -248,7 +248,7 @@ Volume 就是卷的概念，它是用来管理 Kubernetes 存储的，是用来�
 
  
 
-第三个概念：Deployment
+###第三个概念：Deployment
  
 
 Deployment 是在 Pod 这个抽象上更为上层的一个抽象，它可以定义一组 Pod 的副本数目、以及这个 Pod 的版本。一般大家用 Deployment 这个抽象来做应用的真正的管理，而 Pod 是组成 Deployment 最小的单元。
@@ -269,7 +269,7 @@ Kubernetes 是通过 Controller，也就是我们刚才提到的控制器去维�
 
  
 
-第四个概念：Service
+###第四个概念：Service
  
 
 Service 提供了一个或者多个 Pod 实例的稳定访问地址。
@@ -296,7 +296,7 @@ Service 提供了一个或者多个 Pod 实例的稳定访问地址。
 
  
 
-第五个概念：Namespace
+###第五个概念：Namespace
  
 
 Namespace 是用来做一个集群内部的逻辑隔离的，它包括鉴权、资源管理等。Kubernetes 的每个资源，比如刚才讲的 Pod、Deployment、Service 都属于一个 Namespace，同一个 Namespace 中的资源需要命名的唯一性，不同的 Namespace 中的资源可以重名。
