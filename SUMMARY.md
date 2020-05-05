@@ -20,4 +20,5 @@
   * [kubectl create](kubectl-Command-Line/kubectl-create.md)
 * [安装flannel](安装flannel.md)
 * [temp](temp.md)
+* [kubernetes core concept](kubernetes-core-concept.md)
 
