@@ -224,7 +224,7 @@ Pod 是 Kubernetes 的一个最小调度以及资源单元。用户可以通过 
 当然在这个 Pod 中也可以包含一些其他所需要的资源：比如说我们所看到的 Volume 卷这个存储资源；比如说我们需要 100 个 GB 的存储或者 20GB 的另外一个存储。
 
  
-
+![](/assets/k8sC/pod.png)
 
 
  
@@ -242,7 +242,7 @@ Volume 就是卷的概念，它是用来管理 Kubernetes 存储的，是用来�
 
 而 Volume 本身是一个抽象的概念，一个 Volume 可以去支持多种的后端的存储。比如说 Kubernetes 的 Volume 就支持了很多存储插件，它可以支持本地的存储，可以支持分布式的存储，比如说像 ceph，GlusterFS ；它也可以支持云存储，比如说阿里云上的云盘、AWS 上的云盘、Google 上的云盘等等。
 
- 
+ ![](/assets/k8sC/volume.png)
 
 
 
@@ -263,7 +263,7 @@ Kubernetes 是通过 Controller，也就是我们刚才提到的控制器去维�
 
  
 
-
+![](/assets/k8sC/deployment.png)
 
  
 
