@@ -2,7 +2,7 @@ master:
 ![](/assets/master.PNG)  
     APIServer: 组件和Apiserver 通信，  
     Controller：状态管理（水平扩张，自动修复）  
-    Scheduler：把容器交付给node  
+    Scheduler：把容器交付（调度）给node  
     etcd:分布式存储系统  
 node:  
 ![](/assets/node.PNG)
