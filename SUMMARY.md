@@ -24,4 +24,5 @@
     * [ReplicaSet](k8s-resources/controllers/replicaset.md)
     * [Deployments](k8s-resources/controllers/deployments.md)
     * [StatefulSets](k8s-resources/controllers/statefulsets.md)
+    * [DaemonSet](k8s-resources/controllers/daemonset.md)
 
