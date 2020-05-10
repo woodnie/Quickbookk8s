@@ -3,7 +3,7 @@
 
 
 ```
-[root@master ~]# yum insatll ipvsadm`
+[root@master ~]# yum insatll ipvsadm
 
 modprobe br_netfiltr
 

@@ -5,7 +5,6 @@
 * [通过自造轮子访问gcr.io镜像](自造轮子访问gcr.io镜像.md)
 * [kubernetes core concept](kubernetes-core-concept.md)
 * [开启ipvs的前置条件](开启ipvs的前置条件.md)
-* [开启ipvs的前置条件](开启ipvs的前置条件.md)
 * [kubeadm config images list](kubeadm-config-images-list.md)
 * [kubeadm config images pull](kubeadm-config-images-pull.md)
 * [kubeadm config print init-defaults](kubeadm-config-print-init-defaults.md)
@@ -14,10 +13,10 @@
 * [kubeadm init troubleshoting过程](kubeadm-init-troubleshoting.md)
 * [kubeadm-config.yaml](kubeadm-config.yaml.md)
 * [kubeadm reset](kubeadm-reset.md)
-* [开启ipvs的前置条件](开启ipvs的前置条件.md)
+* [安装flannel](安装flannel.md)
 * [kubectl Command Line](kubectl 常用命令.md)
   * [kubectl get](kubectl-Command-Line/kubectl-get.md)
   * [kubectl api-resources](kubectl-Command-Line/kubectl-api-resources.md)
   * [kubectl create](kubectl-Command-Line/kubectl-create.md)
-* [安装flannel](安装flannel.md)
+* kubeadm
 
