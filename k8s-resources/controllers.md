@@ -1,0 +1,1 @@
+The role of the Kubernetes garbage collector is to delete certain objects that once had an owner, but no longer have an owner.

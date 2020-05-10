@@ -25,4 +25,8 @@
     * [Deployments](k8s-resources/controllers/deployments.md)
     * [StatefulSets](k8s-resources/controllers/statefulsets.md)
     * [DaemonSet](k8s-resources/controllers/daemonset.md)
+    * Garbage Collection
+    * [TTL Controller for Finished Resources](k8s-resources/controllers/ttl-controller-for-finished-resources.md)
+    * [Jobs - Run to Completion](k8s-resources/controllers/jobs-run-to-completion.md)
+    * [CronJob](k8s-resources/controllers/cronjob.md)
 
