@@ -5,10 +5,10 @@
 * [通过自造轮子访问gcr.io镜像](自造轮子访问gcr.io镜像.md)
 * [kubernetes core concept](kubernetes-core-concept.md)
 * [开启ipvs的前置条件](开启ipvs的前置条件.md)
+* [kubeadm init --config](kubeadm-init--config.md)
 * [kubeadm config images list](kubeadm-config-images-list.md)
 * [kubeadm config images pull](kubeadm-config-images-pull.md)
 * [kubeadm config print init-defaults](kubeadm-config-print-init-defaults.md)
-* [kubeadm init --config](kubeadm-init--config.md)
 * [kubeadm init log 说明](kubeadm-init-log说明.md)
 * [kubeadm init troubleshoting过程](kubeadm-init-troubleshoting.md)
 * [kubeadm-config.yaml](kubeadm-config.yaml.md)
@@ -18,5 +18,5 @@
   * [kubectl get](kubectl-Command-Line/kubectl-get.md)
   * [kubectl api-resources](kubectl-Command-Line/kubectl-api-resources.md)
   * [kubectl create](kubectl-Command-Line/kubectl-create.md)
-* kubeadm
+* [kubeadm init --config](kubeadm-init--config.md)
 

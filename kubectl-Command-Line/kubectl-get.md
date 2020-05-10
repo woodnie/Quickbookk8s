@@ -2,8 +2,6 @@
 
 
 
-
-
 ```
 [root@master ~]# kubectl get namespace
 NAME              STATUS   AGE
