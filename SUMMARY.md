@@ -22,6 +22,6 @@
   * [Pods](k8s-resources/pods.md)
   * [Controllers](k8s-resources/controllers.md)
     * [ReplicaSet](k8s-resources/controllers/replicaset.md)
-    * Deployments
-    * StatefulSets
+    * [Deployments](k8s-resources/controllers/deployments.md)
+    * [StatefulSets](k8s-resources/controllers/statefulsets.md)
 
