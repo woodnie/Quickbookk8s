@@ -1,67 +1,39 @@
 ##kubectl get
 
+
+
+
+
 ```
-[root@master ~]# kubectl get --help
+[root@master ~]# kubectl get namespace
+NAME              STATUS   AGE
+default           Active   24h
+kube-node-lease   Active   24h
+kube-public       Active   24h
+kube-system       Active   24h
+```
+
+####默认查看 defaut namespace 视图下的pod
+```
+[root@master ~]# kubectl get pod
+No resources found in default namespace.
+```
+####kubeadm 创建的pod 在kube-system namespace 视图下
+```
+[root@master ~]# kubectl get pod --all-namespaces
+NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE
+kube-system   coredns-66bff467f8-ksz88                  1/1     Running   0          25h
+kube-system   coredns-66bff467f8-z7rz2                  1/1     Running   0          25h
+kube-system   etcd-master.wood.com                      1/1     Running   0          25h
+kube-system   kube-apiserver-master.wood.com            1/1     Running   0          25h
+kube-system   kube-controller-manager-master.wood.com   1/1     Running   11         25h
+kube-system   kube-flannel-ds-amd64-6wkv6               1/1     Running   0          22h
+kube-system   kube-flannel-ds-amd64-n5g87               1/1     Running   0          22h
+kube-system   kube-flannel-ds-amd64-zb4qt               1/1     Running   0          25h
+kube-system   kube-proxy-f977b                          1/1     Running   0          25h
+kube-system   kube-proxy-pkj8z                          1/1     Running   1          22h
+kube-system   kube-proxy-td27j                          1/1     Running   1          22h
+kube-system   kube-scheduler-master.wood.com            1/1     Running   10 
 
 
-Display one or many resources
-
-namespace unless you pass --all-namespaces.
-
-Use "kubectl api-resources" for a complete list of supported resources.
-
-
-Examples:
-
-List all pods in ps output format.
-
-  kubectl get pods
-
-  # List all pods in ps output format with more information \(such as node name\).
-
-  kubectl get pods -o wide
-
-  # List a single replication controller with specified NAME in ps output format.
-
-  kubectl get replicationcontroller web
-
-  # List deployments in JSON output format, in the "v1" version of the "apps" API group:
-
-  kubectl get deployments.v1.apps -o json
-
-  # List a single pod in JSON output format.
-
-  kubectl get -o json pod web-pod-13je7
-
-  # List a pod identified by type and name specified in "pod.yaml" in JSON output format.
-
-  kubectl get -f pod.yaml -o json
-
-  # List resources from a directory with kustomization.yaml - e.g. dir/kustomization.yaml.
-
-  kubectl get -k dir/
-
-  # Return only the phase value of the specified pod.
-
-  kubectl get -o template pod/web-pod-13je7 --template={{.status.phase}}
-
-
-
-  # List resource information in custom columns.
-
-  kubectl get pod test-pod -o custom-columns=CONTAINER:.spec.containers\[0\].name,IMAGE:.spec.containers\[0\].image
-
-
-
-  # List all replication controllers and services together in ps output format.
-
-  kubectl get rc,services
-
-
-
-  # List one or more resources by their type and names.
-
-  kubectl get rc/web service/frontend pods/web-pod-13je7
-
-
-
+```
