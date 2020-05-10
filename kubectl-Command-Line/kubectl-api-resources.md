@@ -64,3 +64,10 @@ volumeattachments                              storage.k8s.io                 fa
 
 ```
 
+
++workload
+    pods
+    controlers
+        ReplicaSet
+        ~~ReplicationController~~
+    

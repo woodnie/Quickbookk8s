@@ -18,5 +18,10 @@
   * [kubectl get](kubectl-Command-Line/kubectl-get.md)
   * [kubectl api-resources](kubectl-Command-Line/kubectl-api-resources.md)
   * [kubectl create](kubectl-Command-Line/kubectl-create.md)
-* [kubeadm init --config](kubeadm-init--config.md)
+* [k8s resources](k8s-resources.md)
+  * [Pods](k8s-resources/pods.md)
+  * [Controllers](k8s-resources/controllers.md)
+    * [ReplicaSet](k8s-resources/controllers/replicaset.md)
+    * Deployments
+    * StatefulSets
 
