@@ -1,4 +1,4 @@
-example:myapp.yaml
+###example:myapp.yaml
 This example defines a simple Pod that has two init containers. The first waits for **myservice**, and the second waits for **mydb**. Once both init containers complete, the Pod runs the app container from its spec section.
 ```
 apiVersion: v1
@@ -142,4 +142,42 @@ Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 Error from server (BadRequest): container "init-mydb" in pod "myapp-pod" is waiting to start: PodInitializing
 ```
 **因为myservice和mydb service 没有ready. 本例中myapp-pod一直处于Init状态**
+
+
+###example:service.yaml
+create the mydb and myservice services:
+```
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9376
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mydb
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9377
+```    
+    
+```
+[root@master ~]# kubectl apply -f service.yaml
+service/myservice created
+service/mydb created
+```
+You’ll then see that those init containers complete, and that the myapp-pod Pod moves into the Running state:
+```
+[root@master ~]# kubectl get -f myapp.yaml
+NAME        READY   STATUS    RESTARTS   AGE
+myapp-pod   1/1     Running   0          25m
+```
 
