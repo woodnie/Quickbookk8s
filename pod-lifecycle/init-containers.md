@@ -22,11 +22,12 @@ spec:
 ```
 因为myservice和mydb service 没有ready ,所有本例chu
 
+**start this Pod by running:**
 ```
 [root@master ~]# kubectl apply -f myapp.yaml
 pod/myapp-pod created
 ```
-
+**check on its status with:**
 ```
 [root@master ~]# kubectl get -f myapp.yaml
 NAME        READY   STATUS     RESTARTS   AGE
