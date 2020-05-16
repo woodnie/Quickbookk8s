@@ -29,6 +29,7 @@ spec:
 pod/myapp-pod created
 ```
 **check on its status with:**
+**Init:0/2 表明init C 有两个，当前都没有完成**
 ```
 [root@master ~]# kubectl get -f myapp.yaml
 NAME        READY   STATUS     RESTARTS   AGE
