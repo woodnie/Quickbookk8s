@@ -50,7 +50,7 @@ PodSpec 中有一个 restartPolicy 字段，可能的值为 Always、OnFailure �
 如果节点死亡或与集群的其余部分断开连接，则 Kubernetes 将应用一个策略将丢失节点上的所有 Pod 的 phase 设置为 Failed。
 
 ###示例
-readinessProbe-httpgget
+####readinessProbe-httpgget
 
 ```
 apiVersion: v1
@@ -58,24 +58,36 @@ kind: Pod
 metadata:
   labels:
     test: readiness
-  name: readuness-httpget-pod
+  name: readiness-httpget-pod
 spec:
   containers:
-  - args:
-    - /server
-    image: k8s.gcr.io/liveness
-    livenessProbe:
+  - name: readiness-httpget-c
+    image: nginx:v1
+    readinessProbe:
       httpGet:
-        # 当没有定义 "host" 时，使用 "PodIP"
-        # host: my-host
-        # 当没有定义 "scheme" 时，使用 "HTTP" scheme 只允许 "HTTP" 和 "HTTPS"
-        # scheme: HTTPS
-        path: /healthz
-        port: 8080
-        httpHeaders:
-        - name: X-Custom-Header
-          value: Awesome
-      initialDelaySeconds: 15
-      timeoutSeconds: 1
-    name: liveness
+        port: 80
+        path: /healthz.html
+      initialDelaySeconds: 1
+      periodSeconds: 3
+```
+**pod running but not ready:**
+```
+[root@master ~]# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+myapp-pod               1/1     Running   6          4d18h
+readiness-httpget-pod   0/1     Running   0          47m
+```
+**add file healthz**
+```
+[root@master ~]# kubectl exec -f readinessProbe-httpgget.yaml -it -- /bin/bash
+root@readiness-httpget-pod:/# cd /usr/share/nginx/
+root@readiness-httpget-pod:/usr/share/nginx/html#
+root@readiness-httpget-pod:/usr/share/nginx/html# echo healthz > healthz.html
+```
+**pod running and ready:**
+```
+[root@master ~]# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+myapp-pod               1/1     Running   6          4d18h
+readiness-httpget-pod   1/1     Running   0          47m
 ```
