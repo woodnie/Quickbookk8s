@@ -1,3 +1,5 @@
+https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+
 ###example:myapp.yaml
 This example defines a simple Pod that has two init containers. The first waits for **myservice**, and the second waits for **mydb**. Once both init containers complete, the Pod runs the app container from its spec section.
 ```
