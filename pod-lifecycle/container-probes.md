@@ -77,7 +77,7 @@ NAME                    READY   STATUS    RESTARTS   AGE
 myapp-pod               1/1     Running   6          4d18h
 readiness-httpget-pod   0/1     Running   0          47m
 ```
-**add file healthz**
+**add file healthz.html**
 ```
 [root@master ~]# kubectl exec -f readinessProbe-httpgget.yaml -it -- /bin/bash
 root@readiness-httpget-pod:/# cd /usr/share/nginx/
@@ -90,4 +90,33 @@ root@readiness-httpget-pod:/usr/share/nginx/html# echo healthz > healthz.html
 NAME                    READY   STATUS    RESTARTS   AGE
 myapp-pod               1/1     Running   6          4d18h
 readiness-httpget-pod   1/1     Running   0          47m
+```
+####livenessProbe-httpgget
+```
+[root@master ~]# vi livenessProbe-exec.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: liveness-exec-pod
+spec:
+ containers:
+ - name: liveness-exec-c
+   image: busybox:v1
+   command: ["/bin/sh","-c","touch /tmp/live;sleep 60;rm -rf /tmp/live; sleep 3600"]
+   livenessProbe:
+    exec:
+     command: ["test","-e", "/tmp/live"]
+    initialDelaySeconds: 1
+    periodSeconds: 3
+```
+查看pod状态:
+```
+[root@master ~]# kubectl get pod -w
+NAME                    READY   STATUS    RESTARTS   AGE
+liveness-exec-pod       1/1     Running   0          105s
+liveness-exec-pod       1/1     Running   1          108s
+liveness-exec-pod       1/1     Running   2          3m27s
+liveness-exec-pod       1/1     Running   3          5m5s
+liveness-exec-pod       1/1     Running   4          6m45s
+liveness-exec-pod       1/1     Running   5          8m26s
 ```
