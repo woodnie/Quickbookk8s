@@ -236,4 +236,23 @@ status:
 [root@master ~]#
 ```
 
+##change pod label,为满足replicas: 2 会由ReplicaSet 生产新的pod.
+```
+[root@master ~]# kubectl get pod --show-labels
+NAME                READY   STATUS    RESTARTS   AGE   LABELS
+frontend-rs-bfzng   1/1     Running   0          21h   tier=frontend-rs
+frontend-rs-czgkd   1/1     Running   0          21h   tier=frontend-rs
+
+[root@master ~]# kubectl label pod frontend-rs-bfzng tier=frontend-rs.v1
+error: 'tier' already has a value (frontend-rs), and --overwrite is false
+[root@master ~]# kubectl label pod frontend-rs-bfzng tier=frontend-rs.v1 --overwrite
+pod/frontend-rs-bfzng labeled
+
+[root@master ~]# kubectl get pod --show-labels
+NAME                READY   STATUS    RESTARTS   AGE     LABELS
+frontend-rs-bfzng   1/1     Running   0          22h     tier=frontend-rs.v1
+frontend-rs-czgkd   1/1     Running   0          22h     tier=frontend-rs
+frontend-rs-tccj2   1/1     Running   0          9m17s   tier=frontend-rs
+```
+
 ####Non-Template Pod acquisitions
