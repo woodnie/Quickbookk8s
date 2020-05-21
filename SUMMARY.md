@@ -34,4 +34,5 @@
   * [Init Containers](pod-lifecycle/init-containers.md)
 * [Controllers](controllers.md)
   * [ReplicaSet](controllers/replicaset.md)
+  * [Deployments](controllers/replicaset/deployments.md)
 
