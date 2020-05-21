@@ -1,4 +1,5 @@
 ####ReplicaSet
+
 ```
 [root@master ~]# cat replicaset.yaml
 apiVersion: apps/v1
