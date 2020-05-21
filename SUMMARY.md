@@ -32,4 +32,6 @@
 * [Pod Lifecycle](pod-lifecycle.md)
   * [Container probes](pod-lifecycle/container-probes.md)
   * [Init Containers](pod-lifecycle/init-containers.md)
+* [Controllers](controllers.md)
+  * [ReplicaSet](controllers/replicaset.md)
 
