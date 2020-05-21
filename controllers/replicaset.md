@@ -63,6 +63,7 @@ frontend-rs-bfzng   1/1     Running   0          20h   10.244.2.7   node02.wood.
 frontend-rs-czgkd   1/1     Running   0          20h   10.244.1.4   node01.wood.com   <none>           <none>
 ```
 
+verify that the owner reference of these pods is set to the frontend ReplicaSet.
 ```
 [root@master ~]# kubectl get pod frontend-rs-bfzng -o yaml
 apiVersion: v1
@@ -232,5 +233,4 @@ status:
   qosClass: BestEffort
   startTime: "2020-05-20T16:09:14Z"
 [root@master ~]#
-
 ```
