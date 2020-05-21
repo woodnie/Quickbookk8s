@@ -1,4 +1,4 @@
-
+####ReplicaSet
 ```
 [root@master ~]# cat replicaset.yaml
 apiVersion: apps/v1
@@ -234,3 +234,5 @@ status:
   startTime: "2020-05-20T16:09:14Z"
 [root@master ~]#
 ```
+
+####Non-Template Pod acquisitions
