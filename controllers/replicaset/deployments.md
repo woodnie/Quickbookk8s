@@ -121,9 +121,51 @@ REPOSITORY                                                          TAG         
 nginx                                                               v1.1                a1b7621ed708        36 seconds ago      127MB
 nginx                                                               v1                  602e111c06b6        4 weeks ago         127MB
 
-
+//
 [root@master ~]#  kubectl set image deployment/nginx-deployment nginx=nginx:v1.1
 deployment.apps/nginx-deployment image updated
+
+//过程中会生成新的deployment 
+[root@master ~]# kubectl describe deployment
+Name:                   nginx-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 21 May 2020 22:39:36 +0800
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision: 2
+                        kubernetes.io/change-cause: kubectl apply --filename=nginx-deployment.yaml --record=true
+Selector:               app=nginx
+Replicas:               4 desired | 2 updated | 5 total | 3 available | 2 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx:v1.1
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    ReplicaSetUpdated
+OldReplicaSets:  nginx-deployment-7c5b6964f7 (3/3 replicas created)
+NewReplicaSet:   nginx-deployment-798f64d544 (2/2 replicas created)
+Events:          <none>
+[root@master ~]# kubectl get deployment
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/4     2            3           24h
+
+//会生成一个新的的rs
+[root@master ~]# kubectl get rs
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-798f64d544   2         2         2       83m
+nginx-deployment-7c5b6964f7   3         3         3       24h
+[root@master ~]#
 
 
 [root@master ~]# kubectl get pods -o wide
