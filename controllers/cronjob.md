@@ -36,5 +36,8 @@ hello-1590212400   0/1                      3m6s
 
 [root@master ~]# kubectl get pod
 
-[root@master ~]# kubectl logs 
+[root@master ~]# kubectl logs hello-1590211380-mbkqq
+Sat May 23 06:22:10 UTC 2020
+Hello from the Kubernetes cluster
+
 ```
