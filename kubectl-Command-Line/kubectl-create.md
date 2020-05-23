@@ -43,7 +43,7 @@ wood-nginx-dep-8559775479-kb26t   1/1     Running   1          22h   10.244.1.8 
 [root@master ~]# curl  10.244.1.8/info.html
 wood-nginx-dep-8559775479-kb26t
 [root@master ~]# curl  10.244.2.8/info.html
-wood-nginx-dep-8559775479-tl98d
+wood-nginx-dep-8559775479-7s7vr
 
 ```
 
@@ -80,7 +80,7 @@ UDP  10.96.0.10:53 rr
 [root@master ~]# curl 10.107.69.38/info.html
 wood-nginx-dep-8559775479-kb26t
 [root@master ~]# curl 10.107.69.38/info.html
-wood-nginx-dep-8559775479-tl98d
+wood-nginx-dep-8559775479-7s7vr
 ```
 
 ##kubectl edit svc 
@@ -130,16 +130,16 @@ spec:
 status:
   loadBalancer: {}
 ```
-
+```
 [root@master ~]# kubectl get svc
 NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP        8d
 wood-nginx-dep   NodePort    10.107.69.38   <none>        80:31428/TCP   31m
 
-##
+
 [root@node01 ~]#  curl 192.168.1.100:31428/info.html
 wood-nginx-dep-8559775479-tl98d
 [root@node02 ~]#  curl 192.168.1.100:31428/info.html
 wood-nginx-dep-8559775479-kb26t
-
+```
 
