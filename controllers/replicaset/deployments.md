@@ -215,6 +215,11 @@ REVISION  CHANGE-CAUSE
 1         kubectl apply --filename=nginx-deployment.yaml --record=true
 2         kubectl apply --filename=nginx-deployment.yaml --record=true
 3         kubectl apply --filename=nginx-deployment.yaml --record=true
+//.spec.revisionHistoryLimit
+//指定保留的revison记录数量，默认保留所有revion记录
+//如果将该值设置为0，deplpymnet将不能回退
+
+
 //回退到上一个版本
 [root@master ~]# kubectl rollout undo deployment/nginx-deployment
 deployment.apps/nginx-deployment rolled back
@@ -232,7 +237,7 @@ Waiting for deployment "nginx-deployment" rollout to finish: 2 out of 4 new repl
 //回退到指定版本
 [root@master ~]# kubectl rollout undo deployment/nginx-deployment --to-revison
 
-//回退到指定版本
+//暂停回退
 [root@master ~]# kubectl rollout pause deployment/nginx-deployment --reversion
 
 
