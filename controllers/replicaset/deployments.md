@@ -11,7 +11,7 @@ frontend-rs   2         2         2       23h
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 nginx-deployment   0/2     0            0           26s
 
-#deployment 会自动生成rs:
+//deployment 会自动生成rs:
 [root@master ~]# kubectl get rs
 NAME                          DESIRED   CURRENT   READY   AGE
 nginx-deployment-7c5b6964f7   2         2         0       7s
@@ -86,7 +86,7 @@ Commercial support is available at
 </html>
 
 
-scale 扩容
+###scale 扩容
 ```
 [root@master ~]# kubectl scale deployment nginx-deployment --replicas=4
 deployment.apps/nginx-deployment scaled
@@ -94,11 +94,13 @@ deployment.apps/nginx-deployment scaled
 [root@master ~]# kubectl get deployment
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 nginx-deployment   2/4     2            2           18m
-
-
-
 ```
-镜像更新:
+###自动扩展 （需要群集支持HPA）
+```
+# kubectl autoscale deployment nginx-deployment --min=10  --max=15 --cpu-percent=80--reversion
+```
+
+###更新：通过镜像更新
 ```
 //通过自建docker file 更新nginx 
 [root@node01 ~]# cat mynginx.Dockerfile
@@ -121,7 +123,7 @@ REPOSITORY                                                          TAG         
 nginx                                                               v1.1                a1b7621ed708        36 seconds ago      127MB
 nginx                                                               v1                  602e111c06b6        4 weeks ago         127MB
 
-//
+// 第一次 更新nginx image nginx=nginx:v1.1
 [root@master ~]#  kubectl set image deployment/nginx-deployment nginx=nginx:v1.1
 deployment.apps/nginx-deployment image updated
 
@@ -167,7 +169,7 @@ nginx-deployment-798f64d544   2         2         2       83m
 nginx-deployment-7c5b6964f7   3         3         3       24h
 [root@master ~]#
 
-
+//新旧pod更替中
 [root@master ~]# kubectl get pods -o wide
 NAME                                READY   STATUS    RESTARTS   AGE   IP            NODE              NOMINATED NODE   READINESS GATES
 nginx-deployment-798f64d544-2862x   1/1     Running   0          75m   10.244.2.12   node02.wood.com   <none>           <none>
@@ -175,8 +177,63 @@ nginx-deployment-798f64d544-792vq   1/1     Running   0          75m   10.244.2.
 nginx-deployment-7c5b6964f7-cz8z5   1/1     Running   0          24h   10.244.1.5    node01.wood.com   <none>           <none>
 nginx-deployment-7c5b6964f7-lnbfw   1/1     Running   0          24h   10.244.2.9    node02.wood.com   <none>           <none>
 nginx-deployment-7c5b6964f7-pkzxn   1/1     Running   0          93m   10.244.1.6    node01.wood.com   <none>           <none>
-[root@master ~]# curl 10.244.2.12/version.html
-version=v1.1
-[root@master ~]# curl 10.244.2.11/version.html
+
+
+//第二次 更新nginx image nginx=nginx:v2.1
+[root@master ~]#  kubectl set image deployment/nginx-deployment nginx=nginx:v2.1
+deployment.apps/nginx-deployment image updated
+
+//新pod完成生产
+[root@master ~]# kubectl get pods -o wide
+NAME                                READY   STATUS    RESTARTS   AGE   IP            NODE              NOMINATED NODE   READINESS GATES
+nginx-deployment-5f955cd7bf-62x6m   1/1     Running   0          8h    10.244.2.15   node02.wood.com   <none>           <none>
+nginx-deployment-5f955cd7bf-kmj7s   1/1     Running   0          8h    10.244.1.9    node01.wood.com   <none>           <none>
+nginx-deployment-5f955cd7bf-kvflb   1/1     Running   0          9h    10.244.1.8    node01.wood.com   <none>           <none>
+nginx-deployment-5f955cd7bf-s9ht2   1/1     Running   0          9h    10.244.2.14   node02.wood.com   <none>           <none>
+
+//查看 收到更新的 nginx 的页面，确认 image 已经跟新
+[root@master ~]# curl 10.244.2.14/version.html
+version=v2.1
+[root@master ~]# curl 10.244.2.15/version.html
+version=v2.1
+[root@master ~]# curl 10.244.1.9/version.html
+version=v2.1
+[root@master ~]# curl 10.244.1.8/version.html
+version=v2.1
+
+//交互式编辑
+[root@master ~]# kubectl edit deployment/nginx-deployment
+
+```
+
+###回退
+```
+//查看历史版本, depoyment 创建时需要指定 --recode
+[root@master ~]# kubectl rollout history deployment/nginx-deployment
+deployment.apps/nginx-deployment
+REVISION  CHANGE-CAUSE
+1         kubectl apply --filename=nginx-deployment.yaml --record=true
+2         kubectl apply --filename=nginx-deployment.yaml --record=true
+3         kubectl apply --filename=nginx-deployment.yaml --record=true
+//回退到上一个版本
+[root@master ~]# kubectl rollout undo deployment/nginx-deployment
+deployment.apps/nginx-deployment rolled back
+//查看回退过程
+[root@master ~]# kubectl rollout status deployment/nginx-deployment
+Waiting for deployment spec update to be observed...
+Waiting for deployment spec update to be observed...
+Waiting for deployment "nginx-deployment" rollout to finish: 0 out of 4 new replicas have been updated...
+Waiting for deployment "nginx-deployment" rollout to finish: 0 out of 4 new replicas have been updated...
+Waiting for deployment "nginx-deployment" rollout to finish: 0 out of 4 new replicas have been updated...
+Waiting for deployment "nginx-deployment" rollout to finish: 1 out of 4 new replicas have been updated...
+Waiting for deployment "nginx-deployment" rollout to finish: 2 out of 4 new replicas have been updated...
+
+
+//回退到指定版本
+[root@master ~]# kubectl rollout undo deployment/nginx-deployment --to-revison
+
+//回退到指定版本
+[root@master ~]# kubectl rollout pause deployment/nginx-deployment --reversion
+
 
 ```
