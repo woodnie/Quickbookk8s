@@ -39,11 +39,11 @@ myapp-deployment-775488867c-t56vb   1/1     Running   0          13m   10.244.1.
 
 ###Cluster IP
 ```
-[root@master ~]# cat myapp-service.yaml
+[root@master ~]# cat myapp-serviceclusterip.yaml
 apiVersion: v1
 kind: Service
 metadata:
- name: myapp-service
+ name: myapp-service-clusterip
 spec:
  type: ClusterIP
  selector:
@@ -87,3 +87,40 @@ appversion=v1
    
 ```
 ###NodePort
+```
+[root@master ~]# cat myapp-service-nodePort.yaml
+apiVersion: v1
+kind: Service
+metadata:
+ name: myapp-service-nodeport
+spec:
+ type: NodePort
+ selector:
+  app: myapp
+  release: stabel
+ ports:
+ - name: http
+   port: 80
+   targetPort: 80
+   nodePort: 30000
+[root@master ~]#
+
+[root@master ~]# kubectl apply -f myapp-service-nodePort.yaml
+service/myapp-service-nodeport created
+
+[root@master ~]# kubectl get svc
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+kubernetes               ClusterIP   10.96.0.1      <none>        443/TCP        14d
+myapp-service-nodeport   NodePort    10.107.52.18   <none>        80:30000/TCP   7s
+[root@master ~]#
+
+//访问测试
+[root@master ~]# curl 192.168.1.100:30000/appversion.html
+appversion=v1
+[root@master ~]# curl 192.168.1.101:30000/appversion.html
+appversion=v1
+[root@master ~]# curl 192.168.1.102:30000/appversion.html
+appversion=v1
+[root@master ~]#
+
+```
