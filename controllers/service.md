@@ -51,8 +51,10 @@ spec:
    targetPort: 80
    
 [root@master ~]# kubectl get svc
-NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   14d
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+kubernetes      ClusterIP   10.96.0.1       <none>        443/TCP   14d
+myapp-service   ClusterIP   10.105.69.158   <none>        80/TCP    3s
+
 
    
 ```
