@@ -40,4 +40,7 @@ hello-1590212400   0/1                      3m6s
 Sat May 23 06:22:10 UTC 2020
 Hello from the Kubernetes cluster
 
+
+[root@master ~]# kubectl delete cronjob/hello
+cronjob.batch "hello" deleted
 ```
