@@ -36,5 +36,5 @@
   * [ReplicaSet](controllers/replicaset.md)
   * [Deployments](controllers/replicaset/deployments.md)
   * [CronJob](controllers/cronjob.md)
-  * [Service](controllers/service.md)
+* [Service](controllers/service.md)
 
