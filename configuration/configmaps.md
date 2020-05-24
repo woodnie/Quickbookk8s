@@ -227,3 +227,51 @@ very#
 charm#
 #
 ```
+```
+[root@master configmap]# cat configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: log-config
+data:
+ log_level: INFO
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: my-nginx
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   run: my-nginx
+ template:
+  metadata:
+   labels:
+    run: my-nginx
+  spec:
+   containers:
+   - name: my-nginx
+     image: nginx:v1
+     ports:
+     - containerPort: 80
+     volumeMounts:
+     - name: config-volume
+       mountPath: /etc/configmap
+   volumes:
+    - name: config-volume
+      configMap:
+       name: log-config
+
+[root@master configmap]# kubectl get pod
+NAME                        READY   STATUS    RESTARTS   AGE
+my-nginx-85dbd4bf4b-rsv5c   1/1     Running   0          20s
+
+[root@master configmap]# kubectl exec -it my-nginx-85dbd4bf4b-rsv5c -- /bin/sh
+# ls -l /etc/configmap
+total 0
+lrwxrwxrwx. 1 root root 16 May 24 16:45 log_level -> ..data/log_level
+# cat /etc/configmap/log_level
+INFO# exit
+
+```
