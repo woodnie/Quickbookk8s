@@ -29,7 +29,7 @@ configmap/game-config created
 NAME          DATA   AGE
 game-config   2      17s
 
-[root@master dir]# kubectl describe configmap
+[root@master dir]# kubectl describe configmap/game-config
 Name:         game-config
 Namespace:    default
 Labels:       <none>
