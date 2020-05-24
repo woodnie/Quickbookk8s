@@ -1,4 +1,4 @@
-###使用目录创建
+###通过--from-file指定目录创建
 
 ```
 [root@master ~]# ll install-k8s/configmap/dir/
@@ -57,14 +57,30 @@ how.nice.to.look=fairlyNice
 Events:  <none>
 ```
 
-###使用文件创建
+###通过--from-file指定文件创建
 ```
+[root@master dir]# kubectl create configmap game-config-f1 --from-file=game.properties
+configmap/game-config-f1 created
 [root@master dir]# kubectl create configmap game-config-f2 --from-file=ui.properties
 configmap/game-config-f2 created
+
 [root@master dir]# kubectl get configmap
 NAME             DATA   AGE
-game-config      2      103m
 game-config-f1   1      23s
 game-config-f2   1      14s
 [root@master dir]#
+```
+
+###通过--from-literal指定
+```
+[root@master dir]# kubectl create configmap special-config --from-literal=special.how=very --from-literal=special.type=charm
+configmap/special-config created
+[root@master dir]# kubectl get congfigmap
+error: the server doesn't have a resource type "congfigmap"
+[root@master dir]# kubectl get configmap
+NAME             DATA   AGE
+game-config      2      113m
+game-config-f1   1      10m
+game-config-f2   1      10m
+special-config   2      28s
 ```
