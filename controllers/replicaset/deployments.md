@@ -1,5 +1,30 @@
 Deployments
 ```
+[root@master configmap]# cat ../controllers/myapp-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: myapp-deployment
+spec:
+ replicas: 2
+ selector:
+  matchLabels:
+   app: myapp
+   release: stabel
+ template:
+  metadata:
+   labels:
+    app: myapp
+    release: stabel
+    env: test
+  spec:
+   containers:
+   - name: myapp
+     image: myapp:v1
+     ports:
+     - containerPort: 80
+
+
 [root@master ~]# kubectl apply -f nginx-deployment.yaml --record
 deployment.apps/nginx-deployment created
 
