@@ -227,6 +227,10 @@ very#
 charm#
 #
 ```
+
+####ConfigMap 热跟新
+
+
 ```
 [root@master configmap]# cat configmap.yaml
 apiVersion: v1
@@ -267,11 +271,62 @@ spec:
 NAME                        READY   STATUS    RESTARTS   AGE
 my-nginx-85dbd4bf4b-rsv5c   1/1     Running   0          20s
 
+[root@master configmap]# kubectl get pod -l run=my-nginx
+NAME                        READY   STATUS    RESTARTS   AGE
+my-nginx-85dbd4bf4b-rsv5c   1/1     Running   0          15m
+
+
 [root@master configmap]# kubectl exec -it my-nginx-85dbd4bf4b-rsv5c -- /bin/sh
 # ls -l /etc/configmap
 total 0
 lrwxrwxrwx. 1 root root 16 May 24 16:45 log_level -> ..data/log_level
 # cat /etc/configmap/log_level
 INFO# exit
+
+//log_level: INFO --> log_level: DEBUG
+//ConfigMap
+[root@master configmap]# kubectl edit configmap log-config
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+data:
+  log_level: DEBUG
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"log_level":"INFO"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"log-config","namespace":"default"}}
+  creationTimestamp: "2020-05-24T16:44:54Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:log_level: {}
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+    manager: kubectl
+    operation: Update
+    time: "2020-05-24T16:44:54Z"
+  name: log-config
+  namespace: default
+  resourceVersion: "880866"
+  selfLink: /api/v1/namespaces/default/configmaps/log-config
+  uid: a3918f1d-9778-458c-9f76-ad3990735ba9
+
+DEBUG[root@master configmap]# kubectl exec -it `kubectl get pod -l run=my-nginx -o=name | cut -d "/" -f2` -- cat /etc/configmap/log_level
+DEBUG
+
+ConfigMap 跟新后不会触发相关Pod的滚动更新，可以通过修改pod annotations 的方式强制触发滚动更新
+[root@master configmap]# kubectl patch deployment my-nginx --patch '{"spec": {"template": {"{metadata": {"annotations": {"version/config":"20200525"}}}}}'
+deployment.apps/my-nginx patched (no change)
+
+使用该ConfigMap 挂载的Env 不会同步跟新
+使用该ConfigMap 挂载的volume 中的数据需要一段时间 （大概10秒）才能同步更新
 
 ```
