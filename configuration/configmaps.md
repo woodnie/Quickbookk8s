@@ -98,16 +98,16 @@ data:
 [root@master configmap]# kubectl apply -f env-config.yaml
 configmap/env-config created
 ```
-###Pod 使用ConfigMap ( special-config and env )
-
+###Pod 中使用ConfigMap ( special-config and env )
+####1.使用ConfigMap 来替代环境变量
 ```
 [root@master configmap]# kubectl apply -f configmap-pod.yaml
 pod/configmap-pod created
-[root@master configmap]# cat configmap-pod.yaml
+[root@master configmap]# cat configmap-pod1.yaml
 apiVersion: v1
 kind: Pod
 metadata:
- name: configmap-pod
+ name: configmap-pod1
 spec:
  containers:
   - name: myapp-configmap-c
@@ -129,4 +129,101 @@ spec:
         name: env-config
  restartPolicy: Never
 [root@master configmap]#
+
+[root@master configmap]# kubectl logs configmap-pod
+KUBERNETES_SERVICE_PORT=443
+KUBERNETES_PORT=tcp://10.96.0.1:443
+HOSTNAME=configmap-pod
+HOME=/root
+PKG_RELEASE=1~buster
+SPECIAL_TYPE_KEY=charm
+KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
+NGINX_VERSION=1.17.10
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+KUBERNETES_PORT_443_TCP_PORT=443
+NJS_VERSION=0.3.9
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+SPECIAL_LEVEL_KEY=very
+log_level=INFO
+KUBERNETES_SERVICE_PORT_HTTPS=443
+KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
+KUBERNETES_SERVICE_HOST=10.96.0.1
+PWD=/
+
+```
+
+####2.通过ConfigMap 设置命令行参数
+```
+[root@master configmap]# cat configmap-pod2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: configmap-pod2
+spec:
+ containers:
+  - name: myapp-configmap-c
+    image: myapp:v1
+    command: ["/bin/sh","-c","echo $(SPECIAL_LEVEL_KEY) $(SPECIAL_TYPE_KEY)"]
+    env:
+     - name: SPECIAL_LEVEL_KEY
+       valueFrom:
+        configMapKeyRef:
+         name: special-config
+         key: special.how
+     - name: SPECIAL_TYPE_KEY
+       valueFrom:
+        configMapKeyRef:
+         name: special-config
+         key: special.type
+    envFrom:
+     - configMapRef:
+        name: env-config
+ restartPolicy: Never
+
+[root@master configmap]# kubectl get pod
+NAME             READY   STATUS      RESTARTS   AGE
+configmap-pod2    0/1     Completed   0          42m
+
+[root@master configmap]# kubectl logs configmap-pod2
+very charm
+```
+####3.通过数据卷插件使用ConfigMap
+3.1
+```
+[root@master configmap]# cat configmap-pod3.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: configmap-pod3
+spec:
+ containers:
+  - name: myapp-configmap-c
+    image: myapp:v1
+    command: ["/bin/sh","-c","cat /etc/configmap/special.how /etc/configmap/special.type "]
+    volumeMounts:
+     - name: config-volume
+       mountPath: /etc/configmap
+ volumes:
+  - name: config-volume
+    configMap:
+     name: special-config
+ restartPolicy: Never
+
+[root@master configmap]# kubectl get pod
+NAME             READY   STATUS      RESTARTS   AGE
+configmap-pod3   0/1     Completed   0          116s
+
+[root@master configmap]# kubectl logs configmap-pod3
+verycharm
+```
+3.2
+```
+[root@master configmap]# kubectl exec -it configmap-pod4 -- /bin/sh
+# ls /etc/configmap
+special.how  special.type
+# cat /etc/configmap/special.how
+very#
+# cat /etc/configmap/special.type
+charm#
+#
 ```
