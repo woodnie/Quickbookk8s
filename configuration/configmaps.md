@@ -84,3 +84,49 @@ game-config-f1   1      10m
 game-config-f2   1      10m
 special-config   2      28s
 ```
+
+###yaml 文件指定
+```
+[root@master configmap]# cat env-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: env-config
+data:
+ log_level: INFO
+
+[root@master configmap]# kubectl apply -f env-config.yaml
+configmap/env-config created
+```
+###Pod 使用ConfigMap ( special-config and env )
+
+```
+[root@master configmap]# kubectl apply -f configmap-pod.yaml
+pod/configmap-pod created
+[root@master configmap]# cat configmap-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: configmap-pod
+spec:
+ containers:
+  - name: myapp-configmap-c
+    image: myapp:v1
+    command: ["/bin/sh","-c","env"]
+    env:
+     - name: SPECIAL_LEVEL_KEY
+       valueFrom:
+        configMapKeyRef:
+         name: special-config
+         key: special.how
+     - name: SPECIAL_TYPE_KEY
+       valueFrom:
+        configMapKeyRef:
+         name: sepcail-config
+         key: specail.type
+    envFrom:
+     - configMapRef:
+        name: env-config
+ restartPolicy: Never
+[root@master configmap]#
+```
