@@ -71,7 +71,7 @@ type: Opaque
 1f2d1e2e67df
 [root@master Secret]# echo 'YWRtaW4=' | base64 --decode
 admin
-
+//对于某些情况，您可能希望改用 stringData 字段。此字段允许您将非 base64 编码的字符串直接放入 Secret 中， 并且在创建或更新 Secret 时将为您编码该字符串。
 
 ```
 
