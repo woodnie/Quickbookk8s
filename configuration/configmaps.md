@@ -297,7 +297,7 @@ kind: ConfigMap
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","data":{"log_level":"INFO"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"log-config","namespace":"default"}}
+      {"apiVersion":"v1","data":{"log_level":"DEBUG"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"log-config","namespace":"default"}}
   creationTimestamp: "2020-05-24T16:44:54Z"
   managedFields:
   - apiVersion: v1
