@@ -39,5 +39,5 @@
 * [Service](service.md)
 * [Configuration](configuration.md)
   * [ConfigMaps](configuration/configmaps.md)
-  * Secrets
+  * [Secrets](configuration/secrets.md)
 
