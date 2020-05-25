@@ -275,3 +275,42 @@ spec:
         mode: 511
 ```
 在这种情况下，导致 /etc/foo/my-group/my-username 的文件的权限值为 0777。由于 JSON 限制，必须以十进制格式指定模式。
+
+####Secret 作为环境变量
+将 secret 作为 pod 中的环境变量使用：
+
+创建一个 secret 或者使用一个已存在的 secret。多个 pod 可以引用同一个 secret。
+修改 Pod 定义，为每个要使用 secret 的容器添加对应 secret key 的环境变量。消费secret key 的环境变量应填充 secret 的名称，并键入 env[x].valueFrom.secretKeyRef。
+修改镜像并／或者命令行，以便程序在指定的环境变量中查找值。
+这是一个使用 Secret 作为环境变量的示例：
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-env-pod
+spec:
+  containers:
+  - name: mycontainer
+    image: redis
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: username
+      - name: SECRET_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: password
+  restartPolicy: Never
+```
+消费环境变量里的 Secret 值
+
+在一个消耗环境变量 secret 的容器中，secret key 作为包含 secret 数据的 base-64 解码值的常规环境变量。这是从上面的示例在容器内执行的命令的结果：
+```
+echo $SECRET_USERNAME
+admin
+echo $SECRET_PASSWORD
+1f2d1e2e67df
+```
