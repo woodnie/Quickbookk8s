@@ -40,4 +40,6 @@
 * [Configuration](configuration.md)
   * [ConfigMaps](configuration/configmaps.md)
   * [Secrets](configuration/secrets.md)
+* [Storage](storage.md)
+  * [Volumes](storage/volumes.md)
 
