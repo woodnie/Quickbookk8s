@@ -56,6 +56,32 @@ total 0
 -rw-r--r--    1 root     root             0 May 29 14:54 index.html
 
 ```
+####hostPath
+hostPath 卷能将主机节点文件系统上的文件或目录挂载到您的 Pod 中。 虽然这不是大多数 Pod 需要的，但是它为一些应用程序提供了强大的逃生舱。
+
+例如，hostPath 的一些用法有：
+
+运行一个需要访问 Docker 引擎内部机制的容器；请使用 hostPath 挂载 /var/lib/docker 路径。
+在容器中运行 cAdvisor 时，以 hostPath 方式挂载 /sys。
+允许 Pod 指定给定的 hostPath 在运行 Pod 之前是否应该存在，是否应该创建以及应该以什么方式存在。
+除了必需的 path 属性之外，用户可以选择性地为 hostPath 卷指定 type。
+
+支持的 type 值如下：
+
+|取值	|行为|
+||空字符串（默认）用于向后兼容，这意味着在安装 hostPath 卷之前不会执行任何检查。|
+DirectoryOrCreate	如果在给定路径上什么都不存在，那么将根据需要创建空目录，权限设置为 0755，具有与 Kubelet 相同的组和所有权。
+Directory	在给定路径上必须存在的目录。
+FileOrCreate	如果在给定路径上什么都不存在，那么将在那里根据需要创建空文件，权限设置为 0644，具有与 Kubelet 相同的组和所有权。
+File	在给定路径上必须存在的文件。
+Socket	在给定路径上必须存在的 UNIX 套接字。
+CharDevice	在给定路径上必须存在的字符设备。
+BlockDevice	在给定路径上必须存在的块设备。
+当使用这种类型的卷时要小心，因为：
+
+具有相同配置（例如从 podTemplate 创建）的多个 Pod 会由于节点上文件的不同而在不同节点上有不同的行为。
+当 Kubernetes 按照计划添加资源感知的调度时，这类调度机制将无法考虑由 hostPath 使用的资源。
+基础主机上创建的文件或目录只能由 root 用户写入。您需要在 特权容器 中以 root 身份运行进程，或者修改主机上的文件权限以便容器能够写入 hostPath 卷。
 
 ```
 [root@master volume]# cat hostpath1.yaml
