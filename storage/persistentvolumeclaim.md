@@ -114,7 +114,8 @@ web-0   1/1     Running   0          4h52m   10.244.2.39   node02.wood.com   <no
 web-1   0/1     Pending   0          4h51m   <none>        <none>            <none>           <none>
 [root@master pvc]#
 ```
-修改
+修改PersistentVolume my-nfs-pv2的 spec accessModes 为ReadWriteOnce。
+这样my-nfs-pv2会满足statefulSet 中volumeClaimTemplates的定义。安装顺序 web-1 会运行。
 //- ReadOnlyMany
   - ReadWriteOnce
 
