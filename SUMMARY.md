@@ -46,5 +46,5 @@
 * [Storage](storage.md)
   * [Volumes](storage/volumes.md)
   * [Persistent Volumes](storage/persistent-volumes.md)
-  * persistentVolumeClaim
+  * [persistentVolumeClaim](storage/persistentvolumeclaim.md)
 
