@@ -36,10 +36,15 @@
   * [ReplicaSet](controllers/replicaset.md)
   * [Deployments](controllers/replicaset/deployments.md)
   * [CronJob](controllers/cronjob.md)
+  * StatefulSets
 * [Service](service.md)
+  * [Headless Services](service/headless-services.md)
+  * [Publishing Services](service/publishing-services.md)
 * [Configuration](configuration.md)
   * [ConfigMaps](configuration/configmaps.md)
   * [Secrets](configuration/secrets.md)
 * [Storage](storage.md)
   * [Volumes](storage/volumes.md)
+  * [Persistent Volumes](storage/persistent-volumes.md)
+  * persistentVolumeClaim
 

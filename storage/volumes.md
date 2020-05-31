@@ -1,3 +1,35 @@
+####  Volume 的类型
+Kubernetes 支持下列类型的卷：
+
+awsElasticBlockStore
+azureDisk
+azureFile
+cephfs
+cinder
+configMap
+csi
+downwardAPI
+emptyDir
+fc (fibre channel)
+flexVolume
+flocker
+gcePersistentDisk
+gitRepo (deprecated)
+glusterfs
+hostPath
+iscsi
+local
+nfs
+persistentVolumeClaim
+projected
+portworxVolume
+quobyte
+rbd
+scaleIO
+secret
+storageos
+vsphereVolume
+
 ####emptyDir
 ```
 [root@master volume]# cat emptydir1.yaml
