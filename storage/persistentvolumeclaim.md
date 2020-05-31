@@ -1,4 +1,4 @@
-
+创建nfs
 ```
 [root@master pvc]# cat /etc/exports
 /nfsdata1 *(rw,no_root_squash,no_all_squash,sync)
@@ -6,7 +6,8 @@
 /nfsdata3 *(rw,no_root_squash,no_all_squash,sync)
 [root@master pvc]#
 ```
-3个 PersistentVolume
+
+创建 3个 PersistentVolume
 ```
 [root@master pvc]# cat pvc.yaml
 apiVersion: v1
