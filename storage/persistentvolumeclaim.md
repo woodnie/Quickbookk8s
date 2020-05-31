@@ -114,7 +114,7 @@ web-0   1/1     Running   0          4h52m   10.244.2.39   node02.wood.com   <no
 web-1   0/1     Pending   0          4h51m   <none>        <none>            <none>           <none>
 [root@master pvc]#
 ```
-
+修改
 //- ReadOnlyMany
   - ReadWriteOnce
 
@@ -197,4 +197,25 @@ status:
 
 "/tmp/kubectl-edit-hvd2p.yaml" 65L, 2117C
 
+```
+
+```
+[root@master pvc]# kubectl get pv
+NAME         CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM               STORAGECLASS   REASON   AGE
+my-nfs-pv1   1Gi        RWO            Recycle          Bound       default/www-web-0   nfs                     5h40m
+my-nfs-pv2   5Gi        RWO            Recycle          Bound       default/www-web-1   nfs                     5h40m
+my-nfs-pv3   10Gi       RWX            Recycle          Available                       slow                    5h40m
+
+
+
+[root@master pvc]# kubectl get pod -o wide
+NAME    READY   STATUS    RESTARTS   AGE     IP            NODE              NOMINATED NODE   READINESS GATES
+web-0   1/1     Running   0          5h19m   10.244.2.39   node02.wood.com   <none>           <none>
+web-1   1/1     Running   0          5h19m   10.244.1.31   node01.wood.com   <none>           <none>
+
+
+[root@master pvc]# curl 10.244.2.39/index.html
+nfsdata1
+[root@master pvc]# curl 10.244.1.31/index.html
+nfsdata2
 ```
